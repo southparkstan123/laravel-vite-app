@@ -1,0 +1,14 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "include": ["env.d.ts", "resources/ts/**/*.{vue,ts,d.ts}"],
+  "exclude": ["resources/ts/__tests__/*"],
+  "compilerOptions": {
+    "composite": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [".resources/ts/*"]
+    },
+    "noImplicitAny": false,
+    "resolveJsonModule": true
+  }
+}
