@@ -23,6 +23,8 @@ services:
             - sail
         depends_on:
             - mysql
+            # - mongo
+            # - redis
     mysql:
         image: 'mysql/mysql-server:8.0'
         ports:
@@ -47,9 +49,34 @@ services:
                 - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
+    # mongo:
+    #     image: 'mongo:4.4'
+    #     restart: always
+    #     environment:
+    #         MONGO_INITDB_ROOT_USERNAME: '${MONGO_DB_USERNAME}'
+    #         MONGO_INITDB_ROOT_PASSWORD: '${MONGO_DB_PASSWORD}'
+    #         MONGO_INITDB_DATABASE: '${MONGO_DB_DATABASE}'
+    #     volumes:
+    #         - 'sailmongo:/data/db'
+    #     networks:
+    #         - sail
+    # redis:
+    #     image: 'redis:alpine'
+    #     ports:
+    #         - '${FORWARD_REDIS_PORT:-6379}:6379'
+    #     volumes:
+    #         - 'sailredis:/data'
+    #     networks:
+    #         - sail
+    #     healthcheck:
+    #     test: ["CMD", "redis-cli", "ping"]
 networks:
     sail:
         driver: bridge
 volumes:
     sail-mysql:
         driver: local
+    # sailredis:
+    #     driver: local
+    # sailmongo:
+    #     driver: local
