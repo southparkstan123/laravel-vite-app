@@ -17,6 +17,6 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', function () {
+Route::any('{all}', function () {
     return view('app');
-});
+})->where(['all' => '.*']);
